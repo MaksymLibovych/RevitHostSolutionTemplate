@@ -1,0 +1,42 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Maksym Libovych",
+    "name": "Revit Solution",
+    "shortName": "revit-solution",
+    "identity": "RevitSolutionTemplate",
+    "defaultName": "RevitSolutionTemplate",
+    "sourceName": "RevitSolutionTemplate",
+    "description": "Template for creating a Revit solution plugin",
+    "classifications": [
+      "Library",
+      "Revit",
+      "AddIn",
+      "Solution"
+    ],
+    "tags": {
+      "type": "project",
+      "language": "C#",
+      "platform": ".NET"
+    },
+    "preferNameDirectory": true,
+    "symbols": {
+      "Framework":{
+        "type": "parameter",
+        "datatype":"text",
+        "description": "Framerowk",
+        "defaultValue": "External command",
+        "replaces": "RevitSolutionTemplate"
+      }
+    },
+    "placeProjectInSameDirectory": true,
+    "config": {
+      "solution": {
+        "folders": [
+          { "name": "src", "exclude": false },
+          { "name": "publish", "exclude": false },
+          { "name": "tests", "exclude": false },
+          { "name": "commands", "exclude": false }
+        ]
+      }
+    }
+  }

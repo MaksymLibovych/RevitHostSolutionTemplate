@@ -1,0 +1,11 @@
+<RevitAddIns>
+	<AddIn Type="Application">
+		<Name>RevitSolutionTemplate</Name>
+		<Assembly>RevitSolutionTemplate.Application.dll</Assembly>
+		<AddInId>9C1424B1-9855-400D-BDD9-F5E3C5B7B24E</AddInId>
+		<Text>RevitSolutionTemplate Text</Text>
+		<FullClassName>RevitSolutionTemplate.Application.ExternalApplication</FullClassName>
+		<VendorId>RevitSolutionTemplate VendorId</VendorId>
+		<VendorDescription>RevitSolutionTemplate VendorDescription</VendorDescription>
+	</AddIn>
+</RevitAddIns>
