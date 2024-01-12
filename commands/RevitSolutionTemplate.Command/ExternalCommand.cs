@@ -1,8 +1,10 @@
 ﻿using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
+using RevitSolutionTemplate.RevitCommand.Navigation;
+using RevitSolutionTemplate.RevitCommand.ViewModels;
 
-namespace RevitSolutionTemplate.Command;
+namespace RevitSolutionTemplate.RevitCommand;
 
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
@@ -11,6 +13,18 @@ public class ExternalCommand : IExternalCommand
 {
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {
+        var navigationStore = new NavigationStore
+        {
+            CurrentViewModel = new RevitCommandViewModel()
+        };
+
+        var mainWindow = new MainWindow
+        {
+            DataContext = new MainViewModel(navigationStore)
+        };
+
+        mainWindow.Show();
+
         return Result.Succeeded;
     }
 }

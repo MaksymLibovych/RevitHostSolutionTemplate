@@ -1,7 +1,7 @@
 <RevitAddIns>
 	<AddIn Type="Application">
 		<Name>RevitSolutionTemplate</Name>
-		<Assembly>RevitSolutionTemplate.Application.dll</Assembly>
+		<Assembly>RevitSolutionTemplate.Application/RevitSolutionTemplate.Application.dll</Assembly>
 		<AddInId>9C1424B1-9855-400D-BDD9-F5E3C5B7B24E</AddInId>
 		<Text>RevitSolutionTemplate Text</Text>
 		<FullClassName>RevitSolutionTemplate.Application.ExternalApplication</FullClassName>

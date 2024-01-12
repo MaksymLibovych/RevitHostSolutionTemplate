@@ -5,9 +5,11 @@
         <PlatformTarget>x64</PlatformTarget>
         <ImplicitUsings>true</ImplicitUsings>
         <TargetFramework>net48</TargetFramework>
+		<Nullable>enable</Nullable>
 		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-		<Configurations>Debug 2020;Debug 2021;Debug 2022;Debug 2023;Debug 2024;Release 2020;Release 2021;Release 2022;Release 2023;Release 2024;Installer</Configurations>
-    </PropertyGroup>
+		<Configurations>Debug 2020;Debug 2021;Debug 2022;Debug 2023;Debug 2024;Release 2020;Release 2021;Release 2022;Release 2023;Release 2024</Configurations>
+
+	</PropertyGroup>
 
 	<PropertyGroup Condition="$(Configuration.Contains('Debug'))">
 		<DebugType>full</DebugType>
@@ -43,7 +45,7 @@
 		<DefineConstants>$(DefineConstants);2024</DefineConstants>
 	</PropertyGroup>
 
-	<ItemGroup Condition="'$(Configuration)' != 'Installer'">
+	<ItemGroup>
 		<PackageReference Include="Nice3point.Revit.Api.RevitAPI" Version="$(RevitVersion).*-*" />
 		<PackageReference Include="Nice3point.Revit.Api.RevitAPIUI" Version="$(RevitVersion).*-*" />
 	</ItemGroup>
