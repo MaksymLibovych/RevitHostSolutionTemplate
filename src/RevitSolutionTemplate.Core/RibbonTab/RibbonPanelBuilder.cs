@@ -19,10 +19,11 @@ public class RibbonPanelBuilder
         PushButtonData? commandButton = new(externalCommandType.FullName,
                                             buttonName,
                                             Assembly.GetAssembly(externalCommandType).Location,
-                                            externalCommandType.FullName);
-
-        commandButton.Image = new BitmapImage(new Uri($"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/{externalCommandType.Name}16.png"));
-        commandButton.LargeImage = new BitmapImage(new Uri($"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/{externalCommandType.Name}32.png"));
+                                            externalCommandType.FullName)
+        {
+            Image = new BitmapImage(new Uri($"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/{externalCommandType.Name}16.png")),
+            LargeImage = new BitmapImage(new Uri($"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/{externalCommandType.Name}32.png"))
+        };
         _ribbonPanel.AddItem(commandButton);
 
         return this;

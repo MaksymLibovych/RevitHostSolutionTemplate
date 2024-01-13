@@ -20,23 +20,32 @@
     },
     "preferNameDirectory": true,
     "symbols": {
-      "Framework":{
+      "RevitCommandName":{
+        "displayName": "Revit Command Name",
         "type": "parameter",
         "datatype":"text",
-        "description": "Framerowk",
-        "defaultValue": "External command",
-        "replaces": "RevitSolutionTemplate"
+        "description": "The name for revit external command.",
+        "defaultValue": "ExternalCommand",
+        "replaces": "RevitCommand",
+        "fileRename": "RevitCommand"
       }
     },
-    "placeProjectInSameDirectory": true,
-    "config": {
-      "solution": {
-        "folders": [
-          { "name": "src", "exclude": false },
-          { "name": "publish", "exclude": false },
-          { "name": "tests", "exclude": false },
-          { "name": "commands", "exclude": false }
+    "sources": [
+      {
+        "include": [
+          "src/**",
+          "commands/**",
+          "tests/**",
+          "publish/**"
+        ],
+        "exclude": [
+          "**/[Bb]in/**",
+          "**/[Oo]bj/**",
+          ".template.config/**/*",
+          "**/*.filelist",
+          "**/*.user",
+          "**/*.lock.json"
         ]
       }
-    }
+    ]
   }

@@ -9,7 +9,7 @@ namespace RevitSolutionTemplate.RevitCommand;
 [Transaction(TransactionMode.Manual)]
 [Regeneration(RegenerationOption.Manual)]
 [Journaling(JournalingMode.NoCommandData)]
-public class ExternalCommand : IExternalCommand
+public class RevitCommandExternalCommand : IExternalCommand
 {
     public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
     {

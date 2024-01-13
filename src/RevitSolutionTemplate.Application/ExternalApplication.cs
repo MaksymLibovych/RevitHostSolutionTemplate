@@ -2,7 +2,6 @@
 using RevitSolutionTemplate.RevitCommand;
 using Microsoft.Extensions.Hosting;
 using RevitSolutionTemplate.Core.RibbonTab;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 
 namespace RevitSolutionTemplate.Application;
@@ -24,7 +23,7 @@ public class ExternalApplication : IExternalApplication
         RibbonTabBuilder ribbonTabBuilder = new RibbonTabBuilder(uiControlledApplication, "RevitSolutionTemplateTab")
             .WithRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
             {
-                ribbonPanelBuilder.AddPushButton<ExternalCommand>("TestButton");
+                ribbonPanelBuilder.AddPushButton<RevitCommandExternalCommand>("TestButton");
             });
 
         _host.Start();

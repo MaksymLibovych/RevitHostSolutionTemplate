@@ -1,10 +1,7 @@
-﻿using Autodesk.Revit.UI;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Core.Common.Commands;
 
-//public abstract class CommandBase<TExternalCommand> : ICommand
-//    where TExternalCommand : IExternalCommand
 public abstract class CommandBase : ICommand
 {
     public event EventHandler? CanExecuteChanged;
