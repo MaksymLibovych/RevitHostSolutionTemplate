@@ -1,40 +1,35 @@
 ﻿using Autodesk.Revit.UI;
+using Autofac;
+using RevitSolutionTemplate.Framework;
 using RevitSolutionTemplate.RevitCommand;
-using Microsoft.Extensions.Hosting;
-using RevitSolutionTemplate.Core.RibbonTab;
-using Microsoft.Extensions.Configuration;
 
 namespace RevitSolutionTemplate.Application;
 
 public class ExternalApplication : IExternalApplication
 {
-    private IHost _host;
-
     public Result OnStartup(UIControlledApplication uiControlledApplication)
     {
-        string connectionString = "asdf";
-        _host = Host.CreateDefaultBuilder()
-            .ConfigureServices((hostContext, services) =>
-            {
-                connectionString = hostContext.Configuration.GetConnectionString("Default");
-            })
-            .Build();
+        var builder = RevitApplication.CreateBuilder(uiControlledApplication, "RevitSolutionTemplateTab");
 
-        RibbonTabBuilder ribbonTabBuilder = new RibbonTabBuilder(uiControlledApplication, "RevitSolutionTemplateTab")
-            .WithRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
-            {
-                ribbonPanelBuilder.AddPushButton<RevitCommandExternalCommand>("TestButton");
-            });
+        builder.WithRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
+        {
+            ribbonPanelBuilder.AddRibbonButton<RevitCommandDelegateCommand>(
+                "RevitSolutionTemplateButton",
+                @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand16.png",
+                @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand32.png");
+        });
 
-        _host.Start();
+        builder.Services.RegisterModule<RevitCommandModule>();
+
+        var app = builder.Build();
+
+        app.MapRibbonButton<RevitCommandDelegateCommand>();
 
         return Result.Succeeded;
     }
 
     public Result OnShutdown(UIControlledApplication uiControlledApplication)
     {
-        _host.Dispose();
-
         return Result.Succeeded;
     }
 }

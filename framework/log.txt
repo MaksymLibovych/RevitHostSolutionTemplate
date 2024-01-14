@@ -1,0 +1,69 @@
+2024-01-14 16:33:14.960 +02:00 [Information] Inside Execute
+2024-01-14 16:33:14.964 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:33:15.008 +02:00 [Information] Start executing external command.
+2024-01-14 16:33:15.009 +02:00 [Information] Inside Revit Context
+2024-01-14 16:33:15.027 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:33:16.883 +02:00 [Information] Inside Execute
+2024-01-14 16:33:16.883 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:33:16.888 +02:00 [Information] Start executing external command.
+2024-01-14 16:33:16.889 +02:00 [Information] Inside Revit Context
+2024-01-14 16:33:16.889 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:33:46.562 +02:00 [Information] Inside Execute
+2024-01-14 16:33:46.562 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:33:46.680 +02:00 [Information] Start executing external command.
+2024-01-14 16:33:46.681 +02:00 [Information] Inside Revit Context
+2024-01-14 16:33:46.681 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:37:54.913 +02:00 [Information] Inside Execute
+2024-01-14 16:38:11.567 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:38:11.609 +02:00 [Information] Start executing external command.
+2024-01-14 16:38:11.610 +02:00 [Information] Inside Revit Context
+2024-01-14 16:38:11.700 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:38:32.755 +02:00 [Information] Inside Execute
+2024-01-14 16:38:40.512 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:38:54.690 +02:00 [Information] Start executing external command.
+2024-01-14 16:38:54.691 +02:00 [Information] Inside Revit Context
+2024-01-14 16:38:54.742 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:39:09.255 +02:00 [Information] Inside Execute
+2024-01-14 16:39:09.260 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:39:09.278 +02:00 [Information] Start executing external command.
+2024-01-14 16:39:09.279 +02:00 [Information] Inside Revit Context
+2024-01-14 16:39:09.330 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:39:30.468 +02:00 [Information] Inside Execute
+2024-01-14 16:39:30.470 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:39:30.489 +02:00 [Information] Start executing external command.
+2024-01-14 16:40:33.195 +02:00 [Information] Inside Revit Context
+2024-01-14 16:40:33.247 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:41:07.756 +02:00 [Information] Inside Execute
+2024-01-14 16:41:29.854 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:42:20.463 +02:00 [Information] Start executing external command.
+2024-01-14 16:42:20.464 +02:00 [Information] Inside Revit Context
+2024-01-14 16:42:20.509 +02:00 [Error] The transaction does not have a valid name assigned yet.
+2024-01-14 16:44:46.339 +02:00 [Information] Inside Execute
+2024-01-14 16:44:48.094 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:45:01.052 +02:00 [Information] Start executing external command.
+2024-01-14 16:45:01.054 +02:00 [Information] Inside Revit Context
+2024-01-14 16:45:01.096 +02:00 [Error] Object does not match target type.
+2024-01-14 16:48:29.923 +02:00 [Information] Inside Execute
+2024-01-14 16:48:30.908 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:48:48.692 +02:00 [Information] Start executing external command.
+2024-01-14 16:49:00.829 +02:00 [Information] Inside Revit Context
+2024-01-14 16:52:32.281 +02:00 [Information] Inside Execute
+2024-01-14 16:52:35.939 +02:00 [Information] Executing asynchronous operation
+2024-01-14 16:52:43.244 +02:00 [Information] Start executing external command.
+2024-01-14 16:52:43.247 +02:00 [Information] Inside Revit Context
+2024-01-14 17:19:28.695 +02:00 [Information] Inside Execute
+2024-01-14 17:19:30.466 +02:00 [Information] Executing asynchronous operation
+2024-01-14 17:19:32.666 +02:00 [Information] Start executing external command.
+2024-01-14 17:19:32.669 +02:00 [Information] Inside Revit Context
+2024-01-14 17:21:48.842 +02:00 [Information] Inside Execute
+2024-01-14 17:21:49.914 +02:00 [Information] Executing asynchronous operation
+2024-01-14 17:21:53.415 +02:00 [Information] Start executing external command.
+2024-01-14 17:21:53.420 +02:00 [Information] Inside Revit Context
+2024-01-14 17:26:03.249 +02:00 [Information] Inside Execute
+2024-01-14 17:26:04.050 +02:00 [Information] Executing asynchronous operation
+2024-01-14 17:26:05.851 +02:00 [Information] Start executing external command.
+2024-01-14 17:26:05.854 +02:00 [Information] Inside Revit Context
+2024-01-14 17:29:31.775 +02:00 [Information] Inside Execute
+2024-01-14 17:29:32.449 +02:00 [Information] Executing asynchronous operation
+2024-01-14 17:29:34.511 +02:00 [Information] Start executing external command.
+2024-01-14 17:29:34.514 +02:00 [Information] Inside Revit Context
