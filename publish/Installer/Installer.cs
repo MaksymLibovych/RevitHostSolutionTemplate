@@ -9,7 +9,8 @@ const string projectName = "RevitSolutionTemplate";
 
 var currentDirectory = Directory.GetCurrentDirectory();
 var installerPath = Path.Combine(currentDirectory, "publish", "Installer");
-var tempDir = new DirectoryInfo(Path.Combine(installerPath, "bin", "temp"));
+var insallerPath = new DirectoryInfo(Path.Combine(installerPath, "bin", "temp", "installer"));
+var bundlePath = new DirectoryInfo(Path.Combine(installerPath, "bin", "temp", "bundle"));
 
 var project = new Project
 {
@@ -29,12 +30,16 @@ var project = new Project
     }
 };
 
-var wixEntities = GenerateWixEntities(tempDir.FullName);
+var installerWixEntities = GenerateWixEntities(insallerPath.FullName);
+var bundleWixEntities = GenerateWixEntities(bundlePath.FullName);
 project.RemoveDialogsBetween(NativeDialogs.WelcomeDlg, NativeDialogs.VerifyReadyDlg);
 
 BuildSingleUserMsi();
 BuildMultiUserUserMsi();
-Directory.Delete(tempDir.FullName, true);
+BuildBundle();
+
+Directory.Delete(insallerPath.FullName, true);
+Directory.Delete(bundlePath.FullName, true);
 
 void BuildSingleUserMsi()
 {
@@ -42,7 +47,7 @@ void BuildSingleUserMsi()
     project.OutFileName = $"{projectName}-{project.Version}-SingleUser";
     project.Dirs = new Dir[]
     {
-        new InstallDir(@"%AppDataFolder%\Autodesk\Revit\Addins\", wixEntities)
+        new InstallDir(@"%AppDataFolder%\Autodesk\Revit\Addins\", installerWixEntities)
     };
     project.BuildMsi();
 }
@@ -53,7 +58,18 @@ void BuildMultiUserUserMsi()
     project.OutFileName = $"{projectName}-{project.Version}-MultiUser";
     project.Dirs = new Dir[]
     {
-        new InstallDir(@"%CommonAppDataFolder%\Autodesk\Revit\Addins\", wixEntities)
+        new InstallDir(@"%CommonAppDataFolder%\Autodesk\Revit\Addins\", installerWixEntities)
+    };
+    project.BuildMsi();
+}
+
+void BuildBundle()
+{
+    project.InstallScope = InstallScope.perMachine;
+    project.OutFileName = $"{projectName}-{project.Version}-Bundle";
+    project.Dirs = new Dir[]
+    {
+        new InstallDir(@"%AppDataFolder%\Autodesk\ApplicationPlugins", bundleWixEntities)
     };
     project.BuildMsi();
 }

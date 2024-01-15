@@ -39,6 +39,7 @@
           "framework/**"
         ],
         "exclude": [
+          "output/**",
           "**/[Bb]in/**",
           "**/[Oo]bj/**",
           ".template.config/**/*",

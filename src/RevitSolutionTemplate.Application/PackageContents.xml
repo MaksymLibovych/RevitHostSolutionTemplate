@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ApplicationPackage SchemaVersion="1.0"
+					AutodeskProduct="Revit"
+					Name="RevitSolutionTemplate"
+					AppVersion="1.0.0.0"
+					ProductType="Application"
+					ProductCode="478E143A-AA53-407E-8413-73364FEE26A8">
+
+	<Components Description="Revit 2020">
+		<ComponentEntry AppName="RevitSolutionTemplate" ModuleName=".\Contents\2020\RevitSolutionTemplate.addin"/>
+		<RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2020" SeriesMax="R2020"/>
+	</Components>
+
+	<Components Description="Revit 2021">
+		<ComponentEntry AppName="RevitSolutionTemplate" ModuleName=".\Contents\2021\RevitSolutionTemplate.addin"/>
+		<RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2021" SeriesMax="R2021"/>
+	</Components>
+
+	<Components Description="Revit 2022">
+		<ComponentEntry AppName="RevitSolutionTemplate" ModuleName=".\Contents\2022\RevitSolutionTemplate.addin"/>
+		<RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2022" SeriesMax="R2022"/>
+	</Components>
+
+	<Components Description="Revit 2023">
+		<ComponentEntry AppName="RevitSolutionTemplate" ModuleName=".\Contents\2023\RevitSolutionTemplate.addin"/>
+		<RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2023" SeriesMax="R2023"/>
+	</Components>
+
+	<Components Description="Revit 2024">
+		<ComponentEntry AppName="RevitSolutionTemplate" ModuleName=".\Contents\2024\RevitSolutionTemplate.addin"/>
+		<RuntimeRequirements OS="Win64" Platform="Revit" SeriesMin="R2024" SeriesMax="R2024"/>
+	</Components>
+	
+</ApplicationPackage>

@@ -11,7 +11,6 @@ sealed partial class Build
     .TriggeredBy(Compile)
     .Executes(() =>
     {
-        AbsolutePath installerTemp = Solution.publish.Installer.Directory / @"bin/temp";
         var exePattern = $"*{Solution.publish.Installer.Name}.exe";
         var exeFile = Directory.EnumerateFiles(Solution.publish.Installer.Directory, exePattern, SearchOption.AllDirectories).FirstOrDefault();
         if (exeFile is null) throw new Exception($"No installer file was found for the project: {Solution.publish.Installer.Name}");
