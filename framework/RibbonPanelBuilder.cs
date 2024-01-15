@@ -13,7 +13,7 @@ public class RibbonPanelBuilder
         _ribbonPanel = ribbonPanel;
     }
 
-    public Autodesk.Windows.RibbonButton AddRibbonButton<TDelegateCommand>(string buttonName, string imagePath, string largeImagePath)
+    public Autodesk.Windows.RibbonButton AddDelegateRibbonButton<TDelegateCommand>(string buttonName, string imagePath, string largeImagePath)
         where TDelegateCommand : ICommand
     {
         var ribbonButton = new Autodesk.Windows.RibbonButton

@@ -4,12 +4,11 @@ using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework.Wpf.ViewModels;
 
-public abstract class MainViewModelBase<TDelegateCommand> : ViewModelBase, IMainViewModel<TDelegateCommand>
-    where TDelegateCommand : ICommand
+public abstract class MainViewModelBase : ViewModelBase
 {
-    private readonly NavigationStoreBase<TDelegateCommand> _navigationStoreBase;
+    private readonly NavigationStoreBase _navigationStoreBase;
 
-    public MainViewModelBase(NavigationStoreBase<TDelegateCommand> navigationStoreBase)
+    public MainViewModelBase(NavigationStoreBase navigationStoreBase)
     {
         _navigationStoreBase = navigationStoreBase;
 

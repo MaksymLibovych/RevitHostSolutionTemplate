@@ -3,9 +3,9 @@ using RevitSolutionTemplate.Framework.Wpf.ViewModels;
 
 namespace RevitSolutionTemplate.RevitCommand;
 
-public class MainViewModel : MainViewModelBase<RevitCommandDelegateCommand>
+public class MainViewModel : MainViewModelBase
 {
-    public MainViewModel(NavigationStoreBase<RevitCommandDelegateCommand> navigationStoreBase)
+    public MainViewModel(NavigationStoreBase navigationStoreBase)
         : base(navigationStoreBase)
     {
     }

@@ -1,4 +1,7 @@
 ﻿using Autodesk.Revit.UI;
+using Autodesk.Windows;
+using Autofac;
+using Serilog;
 using System.Reflection;
 using System.Windows.Input;
 
@@ -20,21 +23,40 @@ public sealed class RevitApplication
         return _builder;
     }
 
-    public void MapRibbonButton<TDelegateCommand>()
-        where TDelegateCommand : ICommand
+    public void MapDelegateRibbonButton<TDelegateCommand>()
+        where TDelegateCommand : class, ICommand
     {
         Autodesk.Windows.RibbonItem ribbonItem = _builder.RibbonTab.FindItem(nameof(TDelegateCommand));
 
         if (ribbonItem.GetType() != typeof(Autodesk.Windows.RibbonButton))
         {
-            throw new ArgumentException($"\"{nameof(TDelegateCommand)}\" is not of type {nameof(RibbonButton)}");
+            throw new ArgumentException($"\"{nameof(TDelegateCommand)}\" is not of type {nameof(Autodesk.Windows.RibbonButton)}");
         }
 
         var ribbonButton = (Autodesk.Windows.RibbonButton)ribbonItem;
 
+        using ILifetimeScope scope = _builder.Container.BeginLifetimeScope(ribbonButton);
 
-        var revitDelegateCommand = new DelegateCommand(_revitContextExecutor, _builder.Logger);
+        var isResolved = scope.TryResolve<TDelegateCommand>(out TDelegateCommand? delegateCommand);
+        // Todo
+        ribbonButton.CommandHandler = isResolved ? delegateCommand : null;
+    }
 
-        ribbonButton.CommandHandler = revitDelegateCommand;
+    public void MapDelegateRibbonButton(string ribbonButtonName, Delegate handler)
+    {
+        Autodesk.Windows.RibbonItem ribbonItem = _builder.RibbonTab.FindItem(ribbonButtonName);
+
+        if (ribbonItem.GetType() != typeof(Autodesk.Windows.RibbonButton))
+        {
+            throw new ArgumentException($"\"{ribbonButtonName}\" is not of type {nameof(Autodesk.Windows.RibbonButton)}");
+        }
+
+        var ribbonButton = (Autodesk.Windows.RibbonButton)ribbonItem;
+
+        using ILifetimeScope scope = _builder.Container.BeginLifetimeScope();
+        var commandHandler = new CommandHandler(
+            handler, scope.Resolve<RevitContextExecutor>(), scope.Resolve<ILogger>());
+
+        ribbonButton.CommandHandler = commandHandler;
     }
 }

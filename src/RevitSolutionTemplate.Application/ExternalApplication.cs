@@ -11,9 +11,9 @@ public class ExternalApplication : IExternalApplication
     {
         var builder = RevitApplication.CreateBuilder(uiControlledApplication, "RevitSolutionTemplateTab");
 
-        builder.WithRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
+        builder.WithDelegateRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
         {
-            ribbonPanelBuilder.AddRibbonButton<RevitCommandDelegateCommand>(
+            ribbonPanelBuilder.AddDelegateRibbonButton<RevitCommandDelegateCommand>(
                 "RevitSolutionTemplateButton",
                 @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand16.png",
                 @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand32.png");
@@ -23,7 +23,12 @@ public class ExternalApplication : IExternalApplication
 
         var app = builder.Build();
 
-        app.MapRibbonButton<RevitCommandDelegateCommand>();
+        app.MapDelegateRibbonButton<RevitCommandDelegateCommand>();
+
+        app.MapDelegateRibbonButton("RibbonButton", () =>
+        {
+            
+        });
 
         return Result.Succeeded;
     }

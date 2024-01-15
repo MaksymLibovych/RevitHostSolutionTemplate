@@ -5,13 +5,15 @@ using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework;
 
-public class DelegateCommand : ICommand
+public class CommandHandler : ICommand
 {
+    private readonly Delegate _handler;
     private readonly RevitContextExecutor _revitContextExecutor;
     private readonly ILogger _logger;
 
-    public DelegateCommand(RevitContextExecutor revitContextExecutor, ILogger logger)
+    public CommandHandler(Delegate handler, RevitContextExecutor revitContextExecutor, ILogger logger)
     {
+        _handler = handler;
         _revitContextExecutor = revitContextExecutor ?? throw new ArgumentNullException(nameof(revitContextExecutor));
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }

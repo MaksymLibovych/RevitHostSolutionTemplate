@@ -4,13 +4,12 @@ using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework.Wpf.Navigation;
 
-public class NavigateCommand<TViewModel, TDelegateCommand> : CommandBase
+public class NavigateCommand<TViewModel> : CommandBase
     where TViewModel : ViewModelBase
-    where TDelegateCommand : ICommand
 {
-    private readonly NavigationServiceBase<TViewModel, TDelegateCommand> _navigationService;
+    private readonly NavigationServiceBase<TViewModel> _navigationService;
 
-    public NavigateCommand(NavigationServiceBase<TViewModel, TDelegateCommand> navigationService)
+    public NavigateCommand(NavigationServiceBase<TViewModel> navigationService)
     {
         _navigationService = navigationService;
     }

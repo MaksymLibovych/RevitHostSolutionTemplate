@@ -21,24 +21,18 @@ public class RevitApplicationBuilder
         _containerBuilder = new ContainerBuilder();
         _ribbonTabCollection = ComponentManager.Ribbon.Tabs;
         _ribbonTab = new RibbonTab() { Title = tabName };
-
-        string path = @"C:\Users\maksl\Desktop\RevitSolutionTemplate\framework\log.txt";
-        Logger = new LoggerConfiguration()
-            .WriteTo.Sink(new RevitFileSink(path))
-            .CreateLogger();
-
-        _revitContextExecutor = new RevitContextExecutor(Logger);
     }
 
     public RibbonTab RibbonTab => _ribbonTab;
     public ContainerBuilder Services => _containerBuilder;
-    internal IContainer Container => _container;
-    internal ILogger Logger { get; }
 
-    public RevitApplicationBuilder WithRibbonPanel(string panelName, Action<RibbonPanelBuilder> ribbonPanelConfiguration)
+    internal IContainer Container => _container;
+
+    public RevitApplicationBuilder WithDelegateRibbonPanel(string panelName, Action<RibbonPanelBuilder> ribbonPanelConfiguration)
     {
         var ribbonPanel = new Autodesk.Windows.RibbonPanel
         {
+            Id = panelName,
             Source = new RibbonPanelSource
             {
                 Title = panelName
@@ -57,10 +51,21 @@ public class RevitApplicationBuilder
     {
         _ribbonTabCollection.Add(_ribbonTab);
 
-        using IContainer container = Services.Build();
-        _container = container;
+        _containerBuilder.Register<ILogger>(componentContext =>
+        {
+            // Todo
+            string path = @"C:\Users\libovych\Desktop\AutofacTest\AutofacApplication\log.txt";
 
-        using ILifetimeScope scope = container.BeginLifetimeScope();
+            return new LoggerConfiguration()
+            .WriteTo.Sink(new RevitFileSink(path))
+            .CreateLogger();
+        }).SingleInstance();
+
+        _containerBuilder.RegisterType<RevitContextExecutor>();
+
+        using IContainer container = Services.Build();
+
+        _container = container;
 
         return new RevitApplication(_revitContextExecutor);
     }

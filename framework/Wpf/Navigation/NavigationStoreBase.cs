@@ -3,8 +3,7 @@ using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework.Wpf.Navigation;
 
-public abstract class NavigationStoreBase<TDelegateCommand> : INavigationStore<TDelegateCommand>
-    where TDelegateCommand : ICommand
+public abstract class NavigationStoreBase
 {
     private ViewModelBase? _currentViewModel;
 
