@@ -43,8 +43,35 @@
 		<DefineConstants>$(DefineConstants);Revit2024</DefineConstants>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<PackageId>RevitSolutionTemplate.RevitCommand</PackageId>
+		<Version>1.0.0</Version>
+		<ProjectGuid>{2E0787DF-2779-49C1-9105-4A703A027A3A}</ProjectGuid>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageAssemblyVersion></PackageAssemblyVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="$(Configuration.Contains('Debug'))">
+		<IncludePackageReferencesDuringMarkupCompilation>false</IncludePackageReferencesDuringMarkupCompilation>
+		<Revision>$([MSBuild]::Divide($([System.DateTime]::Now.TimeOfDay.TotalSeconds), 4).ToString('F0'))</Revision>
+		<PackageAssemblyVersion>.Dev.$(Version).$(Revision)</PackageAssemblyVersion>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Company>Fred Munoz</Company>
+		<Authors>Fred Munoz</Authors>
+		<Description>Revit Plugin Description for $(PackageId).</Description>
+		<CopyrightYears>$([System.DateTime]::Now.ToString('yyyy'))</CopyrightYears>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<AssemblyName>$(PackageId)$(PackageAssemblyVersion)</AssemblyName>
+		<Product>$(PackageId)</Product>
+		<Copyright>Copyright © $(CopyrightYears) $(Company)</Copyright>
+	</PropertyGroup>
+
 	<ItemGroup>
-	  <ProjectReference Include="..\..\framework\RevitSolutionTemplate.Framework.csproj" />
-	  <ProjectReference Include="..\..\src\RevitSolutionTemplate.Core\RevitSolutionTemplate.Core.csproj" />
+	  <ProjectReference Include="..\RevitSolutionTemplate.Core\RevitSolutionTemplate.Core.csproj" />
 	</ItemGroup>
 </Project>

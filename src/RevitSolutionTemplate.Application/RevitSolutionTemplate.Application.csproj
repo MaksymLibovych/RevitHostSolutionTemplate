@@ -56,6 +56,14 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+	  <PackageReference Condition="$(Configuration.Contains('Debug'))" Include="ricaun.Revit.UI" Version="0.6.1" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <ProjectReference Include="..\RevitSolutionTemplate.RevitCommand\RevitSolutionTemplate.RevitCommand.csproj" />
+	</ItemGroup>
+	
+	<ItemGroup>
 	  <Resource Include="Resources\Icons\RevitCommandExternalCommand16.png">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
@@ -63,12 +71,11 @@
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Resource>
 	</ItemGroup>
-	
-	<ItemGroup>
-	  <ProjectReference Include="..\RevitSolutionTemplate.RevitCommand\RevitSolutionTemplate.RevitCommand.csproj" />
-	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="appsettings.Development.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	  <None Update="appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </None>
@@ -76,9 +83,12 @@
 
     <Target Name="CopyFiles" AfterTargets="CoreBuild">
         <ItemGroup>
-            <RootItem Include="$(ProjectDir)*.addin"/>
-            <AddinItem Include="$(TargetDir)*"/>
-			<PackageContents Include="$(ProjectDir)*.xml"/>
+            <RootItem Include="$(ProjectDir)*.addin" />
+			<AppSettingsDev Include="appsettings.Development.json" />
+			<AppSettings Include="appsettings.json" />
+			<AddinItem Include="$(TargetDir)*.dll" />
+			<AddinItem Include="$(TargetDir)*.pdb" />
+			<PackageContents Include="$(ProjectDir)*.xml" />
         </ItemGroup>
 
         <PropertyGroup>
@@ -88,25 +98,35 @@
 		</PropertyGroup>
 
         <Copy SourceFiles="@(RootItem)" DestinationFolder="$(RootDir)" />
-        <Copy SourceFiles="@(AddinItem)" DestinationFolder="$(AddinDir)" />
+		<Copy Condition="$(Configuration.Contains('Debug'))" SourceFiles="@(AppSettingsDev)" DestinationFolder="$(AddinDir)" />
+		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(AppSettings)" DestinationFolder="$(AddinDir)" />
+		<Copy SourceFiles="@(AddinItem)" DestinationFolder="$(AddinDir)" />
 
-		<Copy SourceFiles="@(RootItem)" DestinationFolder="$(BundleDir)/Contents/$(RevitVersion)" />
-		<Copy SourceFiles="@(AddinItem)" DestinationFolder="$(BundleDir)/Contents/$(RevitVersion)/$(AssemblyName)"/>
-		<Copy SourceFiles="@(PackageContents)" DestinationFolder="$(BundleDir)"/>
+		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(RootItem)" DestinationFolder="$(BundleDir)/Contents/$(RevitVersion)" />
+		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(AddinItem)" DestinationFolder="$(BundleDir)/Contents/$(RevitVersion)/$(AssemblyName)" />
+		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(PackageContents)" DestinationFolder="$(BundleDir)" />
 
         <ItemGroup>
             <AddinFiles Include="$(RootDir)**\*.*" />
 			<BundleFiles Include="$(BundleDir)**\*.*" />
         </ItemGroup>
 
-        <Copy Condition="$(Configuration.Contains('Debug'))" SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\%(RecursiveDir)" />
+        <!--<Copy Condition="$(Configuration.Contains('Debug'))" SourceFiles="@(AddinFiles)" DestinationFolder="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\%(RecursiveDir)" />-->
 		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(AddinFiles)" DestinationFolder="$(SolutionDir)\publish\Installer\bin\temp\installer\$(RevitVersion)\%(RecursiveDir)" />
 		<Copy Condition="$(Configuration.Contains('Release'))" SourceFiles="@(BundleFiles)" DestinationFolder="$(SolutionDir)\publish\Installer\bin\temp\bundle\$(AssemblyName).bundle\%(RecursiveDir)" />
     </Target>
 
 	<Target Name="DeleteFiles" AfterTargets="Clean">
+
+		<PropertyGroup>
+			<RootDir>bin\$(SharingType) $(RevitVersion) $(Configuration)\</RootDir>
+			<BundleDir>bin\$(AssemblyName).bundle\</BundleDir>
+		</PropertyGroup>
+
+		<RemoveDir Directories="$(RootDir)" />
+		<RemoveDir Directories="$(BundleDir)" />
 		<RemoveDir Directories="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\$(ProjectName)" />
-		<Delete Files="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\$(ProjectName).addin" />
+		<Delete Files="$(AppData)\Autodesk\Revit\Addins\$(RevitVersion)\$(SolutionName).addin" />
 		<RemoveDir Directories="$(SolutionDir)\publish\Installer\bin\temp\installer\$(RevitVersion)" />
 		<RemoveDir Directories="$(SolutionDir)\publish\Installer\bin\temp\bundle\$(AssemblyName).bundle\Contents\$(RevitVersion)" />
 	</Target>

@@ -3,10 +3,10 @@ using RevitSolutionTemplate.Framework.Wpf.ViewModels;
 
 namespace RevitSolutionTemplate.RevitCommand.Navigation;
 
-public class NavigationService<TViewModel> : NavigationServiceBase<TViewModel>
+public class NavigationService<TViewModel> : NavigationServiceBase<RevitCommandHandler, TViewModel>
     where TViewModel : ViewModelBase
 {
-    public NavigationService(NavigationStoreBase navigationStore, Func<TViewModel> createViewModel)
+    public NavigationService(NavigationStoreBase<RevitCommandHandler> navigationStore, Func<TViewModel> createViewModel)
         : base(navigationStore, createViewModel)
     {
     }

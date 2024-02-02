@@ -2,6 +2,6 @@
 
 namespace RevitSolutionTemplate.RevitCommand.Navigation;
 
-public class NavigationStore : NavigationStoreBase
+public class NavigationStore : NavigationStoreBase<RevitCommandHandler>
 {
 }

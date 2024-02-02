@@ -2,7 +2,6 @@
 using Serilog.Events;
 using Serilog.Formatting.Display;
 using Serilog.Formatting;
-using System.IO;
 
 namespace RevitSolutionTemplate.Framework.Logging.Sinks;
 

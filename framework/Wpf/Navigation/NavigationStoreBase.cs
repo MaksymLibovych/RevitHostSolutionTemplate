@@ -1,9 +1,9 @@
 ﻿using RevitSolutionTemplate.Framework.Wpf.ViewModels;
-using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework.Wpf.Navigation;
 
-public abstract class NavigationStoreBase
+public abstract class NavigationStoreBase<TCommandHandler>
+    where TCommandHandler : CommandHandlerBase
 {
     private ViewModelBase? _currentViewModel;
 

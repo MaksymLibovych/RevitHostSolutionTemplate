@@ -7,7 +7,7 @@ namespace RevitSolutionTemplate.Core.Tests.Integration;
 public class Tests
 {
     [Test]
-    public void UIApplication_ShouldBeNotNull_WhenRevitProjectIsOpen(UIApplication uiApplication)
+    public void UIApplication_ShouldNotBeNull_WhenRevitProjectIsOpen(UIApplication uiApplication)
     {
         uiApplication.Should().NotBeNull();
     }

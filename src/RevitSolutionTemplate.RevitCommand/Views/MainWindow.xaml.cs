@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace RevitSolutionTemplate.RevitCommand;
+namespace RevitSolutionTemplate.RevitCommand.Views;
 
 public partial class MainWindow : Window
 {

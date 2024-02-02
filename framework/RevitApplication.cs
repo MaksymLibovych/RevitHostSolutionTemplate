@@ -1,62 +1,49 @@
 ﻿using Autodesk.Revit.UI;
 using Autodesk.Windows;
-using Autofac;
-using Serilog;
-using System.Reflection;
-using System.Windows.Input;
+using Microsoft.Extensions.Hosting;
 
 namespace RevitSolutionTemplate.Framework;
 
-public sealed class RevitApplication
+public class RevitApplication : IDisposable
 {
-    private static RevitApplicationBuilder _builder;
-    private readonly RevitContextExecutor _revitContextExecutor;
+    private readonly IHost _host;
+    private readonly RibbonTabCollection _ribbonTabCollection;
+    private readonly RibbonTab _ribbonTab;
 
-    public RevitApplication(RevitContextExecutor revitContextExecutor)
+    public RevitApplication(IHost host, RibbonTabCollection ribbonTabCollection, RibbonTab ribbonTab)
     {
-        _revitContextExecutor = revitContextExecutor;
+        _host = host;
+        _ribbonTabCollection = ribbonTabCollection;
+        _ribbonTab = ribbonTab;
+
+        _host.Start();
     }
 
-    public static RevitApplicationBuilder CreateBuilder(UIControlledApplication uiControlledApplication, string tabName)
-    {
-        _builder = new RevitApplicationBuilder(uiControlledApplication, tabName);
-        return _builder;
-    }
+    public IServiceProvider Services => _host.Services;
 
-    public void MapDelegateRibbonButton<TDelegateCommand>()
-        where TDelegateCommand : class, ICommand
+    public void AddRibbonPanel(string title, Action<RibbonPanelBuilder> ribbonPanelConfiguration)
     {
-        Autodesk.Windows.RibbonItem ribbonItem = _builder.RibbonTab.FindItem(nameof(TDelegateCommand));
-
-        if (ribbonItem.GetType() != typeof(Autodesk.Windows.RibbonButton))
+        var ribbonPanel = new Autodesk.Windows.RibbonPanel
         {
-            throw new ArgumentException($"\"{nameof(TDelegateCommand)}\" is not of type {nameof(Autodesk.Windows.RibbonButton)}");
-        }
+            Source = new RibbonPanelSource
+            {
+                Title = title
+            }
+        };
 
-        var ribbonButton = (Autodesk.Windows.RibbonButton)ribbonItem;
+        var ribbonPanelBuilder = new RibbonPanelBuilder(ribbonPanel, Services);
+        ribbonPanelConfiguration?.Invoke(ribbonPanelBuilder);
 
-        using ILifetimeScope scope = _builder.Container.BeginLifetimeScope(ribbonButton);
-
-        var isResolved = scope.TryResolve<TDelegateCommand>(out TDelegateCommand? delegateCommand);
-        // Todo
-        ribbonButton.CommandHandler = isResolved ? delegateCommand : null;
+        _ribbonTab.Panels.Add(ribbonPanel);
     }
 
-    public void MapDelegateRibbonButton(string ribbonButtonName, Delegate handler)
+    public static RevitApplicationBuilder CreateBuilder(
+        UIControlledApplication uiControlledApplication, string tabName)
+            => new(uiControlledApplication, tabName);
+
+    public void Dispose()
     {
-        Autodesk.Windows.RibbonItem ribbonItem = _builder.RibbonTab.FindItem(ribbonButtonName);
-
-        if (ribbonItem.GetType() != typeof(Autodesk.Windows.RibbonButton))
-        {
-            throw new ArgumentException($"\"{ribbonButtonName}\" is not of type {nameof(Autodesk.Windows.RibbonButton)}");
-        }
-
-        var ribbonButton = (Autodesk.Windows.RibbonButton)ribbonItem;
-
-        using ILifetimeScope scope = _builder.Container.BeginLifetimeScope();
-        var commandHandler = new CommandHandler(
-            handler, scope.Resolve<RevitContextExecutor>(), scope.Resolve<ILogger>());
-
-        ribbonButton.CommandHandler = commandHandler;
+        _ribbonTabCollection.Remove(_ribbonTab);
+        _host.Dispose();
     }
 }

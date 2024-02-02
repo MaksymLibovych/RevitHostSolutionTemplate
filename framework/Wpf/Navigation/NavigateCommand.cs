@@ -1,15 +1,15 @@
 ﻿using RevitSolutionTemplate.Framework.Wpf.Commands;
 using RevitSolutionTemplate.Framework.Wpf.ViewModels;
-using System.Windows.Input;
 
 namespace RevitSolutionTemplate.Framework.Wpf.Navigation;
 
-public class NavigateCommand<TViewModel> : CommandBase
+public class NavigateCommand<TCommandHandler, TViewModel> : CommandBase
+    where TCommandHandler : CommandHandlerBase
     where TViewModel : ViewModelBase
 {
-    private readonly NavigationServiceBase<TViewModel> _navigationService;
+    private readonly NavigationServiceBase<TCommandHandler, TViewModel> _navigationService;
 
-    public NavigateCommand(NavigationServiceBase<TViewModel> navigationService)
+    public NavigateCommand(NavigationServiceBase<TCommandHandler, TViewModel> navigationService)
     {
         _navigationService = navigationService;
     }

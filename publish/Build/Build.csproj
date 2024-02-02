@@ -15,4 +15,40 @@
     <PackageReference Include="Nuke.Common" Version="7.0.6" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-37-08.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-38-29.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-47-34.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-56-39.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-30_17-21-16.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-30_17-21-16.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-47-34.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="..\..\.nuke\temp\build.2024-01-15_18-37-08.log" />
+  </ItemGroup>
+
 </Project>

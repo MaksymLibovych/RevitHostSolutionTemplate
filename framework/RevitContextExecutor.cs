@@ -8,7 +8,7 @@ public class RevitContextExecutor
     private readonly ILogger _logger;
     private readonly ExternalEventHandler _externalEventHandler;
     private readonly ExternalEvent _externalEvent;
-    private TaskCompletionSource<object> _taskCompletionSource;
+    private TaskCompletionSource<object>? _taskCompletionSource;
 
     public RevitContextExecutor(ILogger logger)
     {

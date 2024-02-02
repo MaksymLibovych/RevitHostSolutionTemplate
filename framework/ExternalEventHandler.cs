@@ -6,7 +6,7 @@ namespace RevitSolutionTemplate.Framework;
 internal class ExternalEventHandler : IExternalEventHandler
 {
     private readonly ILogger _logger;
-    private Func<UIApplication, object> _function;
+    private Func<UIApplication, object>? _function;
 
     public ExternalEventHandler(ILogger logger)
     {
@@ -23,7 +23,7 @@ internal class ExternalEventHandler : IExternalEventHandler
         try
         {
             _logger.Information("Start executing external command.");
-            _function.Invoke(app);
+            _function?.Invoke(app);
         }
         catch (Exception exception)
         {

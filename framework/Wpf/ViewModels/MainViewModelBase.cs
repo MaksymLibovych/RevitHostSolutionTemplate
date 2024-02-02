@@ -1,14 +1,13 @@
-﻿using Autodesk.Revit.UI;
-using RevitSolutionTemplate.Framework.Wpf.Navigation;
-using System.Windows.Input;
+﻿using RevitSolutionTemplate.Framework.Wpf.Navigation;
 
 namespace RevitSolutionTemplate.Framework.Wpf.ViewModels;
 
-public abstract class MainViewModelBase : ViewModelBase
+public abstract class MainViewModelBase<TCommandHandler> : ViewModelBase
+    where TCommandHandler : CommandHandlerBase
 {
-    private readonly NavigationStoreBase _navigationStoreBase;
+    private readonly NavigationStoreBase<TCommandHandler> _navigationStoreBase;
 
-    public MainViewModelBase(NavigationStoreBase navigationStoreBase)
+    public MainViewModelBase(NavigationStoreBase<TCommandHandler> navigationStoreBase)
     {
         _navigationStoreBase = navigationStoreBase;
 

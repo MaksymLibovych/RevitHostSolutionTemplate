@@ -36,7 +36,11 @@
           "src/**",
           "tests/**",
           "publish/**",
-          "framework/**"
+          "framework/**",
+          ".nuke/**",
+          "build.cmd",
+          "build.ps1",
+          "build.sh"
         ],
         "exclude": [
           "output/**",
@@ -45,7 +49,8 @@
           ".template.config/**/*",
           "**/*.filelist",
           "**/*.user",
-          "**/*.lock.json"
+          "**/*.lock.json",
+          ".nuke/temp/**"
         ]
       }
     ]

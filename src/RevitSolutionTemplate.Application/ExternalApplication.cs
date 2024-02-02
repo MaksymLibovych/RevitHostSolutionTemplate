@@ -1,33 +1,33 @@
 ﻿using Autodesk.Revit.UI;
-using Autofac;
 using RevitSolutionTemplate.Framework;
 using RevitSolutionTemplate.RevitCommand;
+#if DEBUG
+using ricaun.Revit.UI;
+#endif
 
 namespace RevitSolutionTemplate.Application;
 
+#if DEBUG
+[AppLoader]
+#endif
 public class ExternalApplication : IExternalApplication
 {
+    private RevitApplication? _revitApplication;
+
     public Result OnStartup(UIControlledApplication uiControlledApplication)
     {
-        var builder = RevitApplication.CreateBuilder(uiControlledApplication, "RevitSolutionTemplateTab");
+        var builder = RevitApplication.CreateBuilder(uiControlledApplication, "TabName");
 
-        builder.WithDelegateRibbonPanel("RevitSolutionTemplatePanel", ribbonPanelBuilder =>
+        builder.Services.AddRevitCommand();
+
+        _revitApplication = builder.Build();
+
+        _revitApplication.AddRibbonPanel("RibbonPanel", panelBuilder =>
         {
-            ribbonPanelBuilder.AddDelegateRibbonButton<RevitCommandDelegateCommand>(
-                "RevitSolutionTemplateButton",
-                @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand16.png",
-                @"pack://application:,,,/RevitSolutionTemplate.Application;component/Resources/Icons/RevitCommandExternalCommand32.png");
-        });
-
-        builder.Services.RegisterModule<RevitCommandModule>();
-
-        var app = builder.Build();
-
-        app.MapDelegateRibbonButton<RevitCommandDelegateCommand>();
-
-        app.MapDelegateRibbonButton("RibbonButton", () =>
-        {
-            
+            panelBuilder.AddRibbonButton<RevitCommandHandler>(
+                "ButtonName",
+                "Resources/Icons/RevitCommandExternalCommand16.png",
+                "Resources/Icons/RevitCommandExternalCommand32.png");
         });
 
         return Result.Succeeded;
@@ -35,6 +35,7 @@ public class ExternalApplication : IExternalApplication
 
     public Result OnShutdown(UIControlledApplication uiControlledApplication)
     {
+        _revitApplication?.Dispose();
         return Result.Succeeded;
     }
 }
